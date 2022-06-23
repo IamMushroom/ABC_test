@@ -1,7 +1,7 @@
 version: "3"
 services:
   pool:
-    image: ImMushroom/mintme:latest
+    image: immushroom/mintme:latest
     ports:
     - 3333:3333
     - 8888:8888
