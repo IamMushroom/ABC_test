@@ -1,4 +1,3 @@
-version: "3"
 services:
   pool:
     image: immushroom/mintme:latest
@@ -17,7 +16,7 @@ services:
     ports:
     - 30303:30303
     - 8545:8545
-    command: geth --mintme --nodiscover --maxpeers 0
+    command: '--mintme --nodiscover --maxpeers 0'
   redis:
     image: redis
     volumes:

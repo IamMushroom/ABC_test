@@ -1,6 +1,6 @@
-FROM golang:1.17
+FROM golang:1.8
 RUN apt-get update && apt-get install -y git
-RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
+RUN curl -fsSL https://deb.nodesource.com/setup_4.x | bash -
 RUN apt-get install -y nodejs build-essential
 RUN git clone https://github.com/mintme-com/pool.git /app
 WORKDIR /app/www
