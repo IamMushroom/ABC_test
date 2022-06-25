@@ -16,7 +16,9 @@ services:
     ports:
     - 30303:30303
     - 8545:8545
-    command: '--mintme --nodiscover --maxpeers 0'
+    command: '--mintme --nodiscover --maxpeers 0 --http --http.addr 0.0.0.0 --http.port 8545 --http.vhosts "*" --verbosity 5'
+    volumes:
+    - '$HOME/core-geth:/root'
   redis:
     image: redis
     volumes:

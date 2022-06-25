@@ -4,18 +4,22 @@
     "name": "main",
   
     "proxy": {
-        "enabled": true,
-  
-        "listen": "0.0.0.0:8888",
-  
-        "limitHeadersSize": 1024,
-        "limitBodySize": 256,
-  
-        "behindReverseProxy": false,
+		"enabled": true,
+		"listen": "0.0.0.0:8888",
+		"limitHeadersSize": 1024,
+		"limitBodySize": 256,
+		"behindReverseProxy": false,
+		"blockRefreshInterval": "120ms",
+		"stateUpdateInterval": "3s",
+		"difficulty": 1000,
+		"hashrateExpiration": "3h",
+
+		"healthCheck": true,
+		"maxFails": 100,
   
         "stratum": {
             "enabled": true,
-            "listen": "0.0.0.0:8008",
+            "listen": "0.0.0.0:3333",
             "timeout": "120s",
             "maxConn": 8192
         },
@@ -27,14 +31,6 @@
             "variancePercent": 30,
             "maxJump": 50
         },
-    
-        "blockRefreshInterval": "120ms",
-        "stateUpdateInterval": "3s",
-        "difficulty": 1000,
-    
-        "healthCheck": true,
-        "maxFails": 100,
-        "hashrateExpiration": "3h",
     
         "policy": {
             "workers": 8,
@@ -77,25 +73,20 @@
     "upstream": [
         {
             "name": "main",
-            "url": "http://127.0.0.1:39573",
-            "timeout": "10s"
-        },
-        {
-            "name": "backup",
-            "url": "http://127.0.0.2:39573",
+            "url": "http://core-geth:8545",
             "timeout": "10s"
         }
     ],
     
     "redis": {
-        "endpoint": "127.0.0.1:6379",
+        "endpoint": "redis:6379",
         "poolSize": 10,
         "database": 0,
-        "password": ""
+        "password": "9deS+AQ7ORqcT6JRtQ469opldiuCJc+il6zgG46b1zi+lLJKgETmsWIwvO9zi6ID56n1AVXll2S3z6i6"
     },
     
     "unlocker": {
-        "enabled": false,
+        "enabled": true,
         "poolFee": 1.0,
         "poolFeeAddress": "",
         "devDonate": 10.0,
@@ -103,15 +94,15 @@
         "immatureDepth": 20,
         "keepTxFees": false,
         "interval": "10m",
-        "daemon": "http://127.0.0.1:8545",
+        "daemon": "http://core-geth:8545",
         "timeout": "10s"
     },
     
     "payouts": {
-        "enabled": false,
-        "requirePeers": 25,
+        "enabled": true,
+        "requirePeers": 2,
         "interval": "12h",
-        "daemon": "http://127.0.0.1:39573",
+        "daemon": "http://core-geth:8545",
         "timeout": "10s",
         "address": "0x0",
         "autoGas": true,
@@ -119,5 +110,11 @@
         "gasPrice": "50000000000",
         "threshold": 500000000,
         "bgsave": false
-    }
+    },
+
+	"newrelicEnabled": false,
+	"newrelicName": "MyEtherProxy",
+	"newrelicKey": "SECRET_KEY",
+	"newrelicVerbose": false
+    
 }
